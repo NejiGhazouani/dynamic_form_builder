@@ -23,25 +23,25 @@ const formFieldsReducer = (state: FormFieldsState, action: FieldAction): FormFie
     case "ADD_FIELD":
       return { ...state, fields: [...state.fields, action.payload] };
       case "UPDATE_FIELD_VALUE":
-  if ("id" in action.payload) {
-    const { id, value } = action.payload;
-    return {
-      ...state,
-      fields: state.fields.map((field) =>
-        field.id === id ? { ...field, value } : field
-      ),
-    };
-  } else if ("fieldId" in action.payload) {
-    const { fieldId, updatedField } = action.payload;
-    return {
-      ...state,
-      fields: state.fields.map((field) =>
-        field.id === fieldId ? updatedField : field
-      ),
-    };
-  }
-  return state;
-
+        if ("id" in action.payload) {
+          const { id, value } = action.payload;
+          return {
+            ...state,
+            fields: state.fields.map((field) =>
+              field.id === id ? { ...field, value } : field
+            ),
+          };
+        } else if ("fieldId" in action.payload) {
+          const { fieldId, updatedField } = action.payload;
+          return {
+            ...state,
+            fields: state.fields.map((field) =>
+              field.id === fieldId ? updatedField : field
+            ),
+          };
+        }
+        return state;
+      
     case "REMOVE_FIELD":
       return { ...state, fields: state.fields.filter((field) => field.id !== action.payload) };
       case "RESET_FORM":
