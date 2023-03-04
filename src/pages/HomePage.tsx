@@ -72,7 +72,6 @@ const FormBuilder: React.FC = () => {
               value:'',
               options: currentField.value.split(",").map((option) => ({ label: option.trim(), value: option.trim() })),
             } as FieldSelect;
-            console.log(newField)
           } else {
             throw new Error("Value must be a string.");
           }

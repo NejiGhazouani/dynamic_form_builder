@@ -20,12 +20,11 @@ const Form: React.FC<Props> = ({ fields, onDeleteField, onEditField }) => {
       case "text":
         return (
           <FormText
-          key={field.id}
-          field={field as FieldText}
-          dispatch={dispatch}
-          onDeleteField={onDeleteField}
-          onEditField={onEditField}
-        />
+            key={field.id}
+            field={field as FieldText}
+            
+
+          />
         );
       case "checkbox":
         return (
@@ -50,11 +49,13 @@ const Form: React.FC<Props> = ({ fields, onDeleteField, onEditField }) => {
       case "select":
         return (
           <FormSelect
+          index={0}
             key={field.id}
             field={field as FieldSelect}
             dispatch={dispatch}
             onDeleteField={onDeleteField}
-            onEditField={onEditField} index={0}          />
+            onEditField={onEditField}
+          />
         );
       default:
         return null;
