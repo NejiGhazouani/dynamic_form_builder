@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FieldSelect } from "../../../types/formTypes";
 import { FieldAction } from "../../../types/formTypes";
 
@@ -11,11 +11,13 @@ interface FormSelectProps {
 }
 
 const FormSelect: React.FC<FormSelectProps> = ({ index, field, dispatch }) => {
+  const [inputValue, setInputValue] = useState("");
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log("Selected value:", event.target.value,field.id);
+    const { value } = event.target;
+    setInputValue(value);
     dispatch({
       type: "UPDATE_FIELD_VALUE",
-      payload: { id: field.id, value: event.target.value },
+      payload: { id: field.id, value: inputValue },
     });
   };
 
@@ -29,7 +31,7 @@ const FormSelect: React.FC<FormSelectProps> = ({ index, field, dispatch }) => {
         id={field.label}
         name={field.label}
         required={field.required}
-        value={String(field.value || '')}
+        value={inputValue}
         onChange={handleChange}
       >
         <option value="">Please select an option</option>
