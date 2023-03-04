@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FormContext } from "../components/form/FormContext";
 import Form from "../components/form/form";
+import { useNavigate } from 'react-router-dom';
 import { Field, FieldText, FieldCheckbox, FieldRadio, FieldSelect, FormState, FormFieldsState, FieldType } from "../types/formTypes";
 import { FormFieldsContext } from "../components/form/formFields/FormFieldsContext";
 
@@ -8,6 +9,7 @@ const FormBuilder: React.FC = () => {
   const { dispatch: dispatchFormFields } = useContext(FormFieldsContext);
   const { dispatch: dispatchForm } = useContext(FormContext);
   const [fields, setFields] = useState<Field[]>([]);
+  const navigate = useNavigate();
   const [formName, setFormName] = useState<string>("");
   const [formData, setFormData] = useState<FormState>({ forms: [] });
   const [currentField, setCurrentField] = useState<Field>({
@@ -88,7 +90,8 @@ const FormBuilder: React.FC = () => {
   const handleAddFormToList = () => {
     const newForm = { id: Math.random(), name: formName, fields };
     dispatchForm({ type: "ADD_FORM_DATA", payload: { ...formData, forms: [...formData.forms, newForm] } });
-    console.log(newForm)
+    
+    navigate('/FormList');
   };
 
   const handleDeleteField = (fieldId: number) => {
